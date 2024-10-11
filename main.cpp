@@ -47,7 +47,8 @@ void add_images(const char *img1, const char *img2)
     GrayscaleImage image1(img1), image2(img2);
     GrayscaleImage result = image1 + image2;
     std::string output_filename = "added_" + remove_extension(img1) + "_" + remove_extension(img2) + ".png";
-    result.save_to_file(output_filename.c_str());
+    // result.save_to_file(output_filename.c_str());
+    result.save_to_file("./output.png");
 }
 
 // Subtracts the second image from the first and saves the resulting image
@@ -56,7 +57,8 @@ void subtract_images(const char *img1, const char *img2)
     GrayscaleImage image1(img1), image2(img2);
     GrayscaleImage result = image1 - image2;
     std::string output_filename = "subtracted_" + remove_extension(img1) + "_" + remove_extension(img2) + ".png";
-    result.save_to_file(output_filename.c_str());
+    // result.save_to_file(output_filename.c_str());
+    result.save_to_file("./output.png");
 }
 
 // Compares two images and prints whether they are identical

@@ -72,7 +72,7 @@ GrayscaleImage::GrayscaleImage(int w, int h) : width(w), height(h)
     // TODO: Your code goes here.
     // Just dynamically allocate the memory for the new matrix.
     data = new int *[height];
-    for (int i = 0; i < width; i++)
+    for (int i = 0; i < height; i++)
     {
         data[i] = new int[width];
     }
@@ -84,8 +84,11 @@ GrayscaleImage::GrayscaleImage(const GrayscaleImage &other)
     // TODO: Your code goes here.
     // Copy constructor: dynamically allocate memory and
     // copy pixel values from another image.
+    this->width = other.width;
+    this->height = other.height;
+
     data = new int *[height];
-    for (int i = 0; i < width; i++)
+    for (int i = 0; i < height; i++)
     {
         data[i] = new int[width];
     }
@@ -104,6 +107,10 @@ GrayscaleImage::~GrayscaleImage()
 {
     // TODO: Your code goes here.
     // Destructor: deallocate memory for the matrix.
+    for (int i = 0; i < height; i++)
+    {
+        delete[] data[i];
+    }
     delete[] data;
 }
 
@@ -113,6 +120,20 @@ bool GrayscaleImage::operator==(const GrayscaleImage &other) const
     // TODO: Your code goes here.
     // Check if two images have the same dimensions and pixel values.
     // If they do, return true.
+    if (this->width == other.width && this->height == other.height)
+    {
+        for (int i = 0; i < height; i++)
+        {
+            for (int j = 0; j < width; j++)
+            {
+                if (this->data[i][j] != other.data[i][j])
+                {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
     return false;
 }
 
@@ -124,6 +145,18 @@ GrayscaleImage GrayscaleImage::operator+(const GrayscaleImage &other) const
 
     // TODO: Your code goes here.
     // Add two images' pixel values and return a new image, clamping the results.
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            int sum = this->data[i][j] + other.data[i][j];
+            if (sum > 255)
+            {
+                sum = 255;
+            }
+            result.data[i][j] = sum;
+        }
+    }
 
     return result;
 }
@@ -136,6 +169,18 @@ GrayscaleImage GrayscaleImage::operator-(const GrayscaleImage &other) const
 
     // TODO: Your code goes here.
     // Subtract pixel values of two images and return a new image, clamping the results.
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            int difference = this->data[i][j] - other.data[i][j];
+            if (difference < 0)
+            {
+                difference = 0;
+            }
+            result.data[i][j] = difference;
+        }
+    }
 
     return result;
 }
