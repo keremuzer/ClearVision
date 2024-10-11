@@ -1,0 +1,9 @@
+{
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "/home/kerem/projects/practice_exercises/exercise1",
+            "binaryPath": "/home/kerem/projects/practice_exercises/exercise1/app",
+            "binaryArgs": []
+        }
+    ]
+}

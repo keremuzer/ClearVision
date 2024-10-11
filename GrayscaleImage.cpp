@@ -1,21 +1,22 @@
 #include "GrayscaleImage.h"
 #include <iostream>
-#include <cstring>  // For memcpy
+#include <cstring> // For memcpy
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "stb_image_write.h"
 #include <stdexcept>
 
-
 // Constructor: load from a file
-GrayscaleImage::GrayscaleImage(const char* filename) {
+GrayscaleImage::GrayscaleImage(const char *filename)
+{
 
     // Image loading code using stbi
     int channels;
-    unsigned char* image = stbi_load(filename, &width, &height, &channels, STBI_grey);
+    unsigned char *image = stbi_load(filename, &width, &height, &channels, STBI_grey);
 
-    if (image == nullptr) {
+    if (image == nullptr)
+    {
         std::cerr << "Error: Could not load image " << filename << std::endl;
         exit(1);
     }
@@ -23,39 +24,92 @@ GrayscaleImage::GrayscaleImage(const char* filename) {
     // TODO: Your code goes here.
     // Dynamically allocate memory for a 2D matrix based on the given dimensions.
     // Fill the matrix with pixel values from the image
+    data = new int *[height];
+    for (int i = 0; i < height; i++)
+    {
+        data[i] = new int[width];
+    }
+
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            data[i][j] = image[i * width + j];
+        }
+    }
 
     // Free the dynamically allocated memory of stbi image
     stbi_image_free(image);
 }
 
 // Constructor: initialize from a pre-existing data matrix
-GrayscaleImage::GrayscaleImage(int** inputData, int h, int w) {
+GrayscaleImage::GrayscaleImage(int **inputData, int h, int w)
+{
     // TODO: Your code goes here.
     // Initialize the image with a pre-existing data matrix by copying the values.
     // Don't forget to dynamically allocate memory for the matrix.
+    this->width = w;
+    this->height = h;
+
+    data = new int *[height];
+    for (int i = 0; i < height; i++)
+    {
+        data[i] = new int[width];
+    }
+
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            data[i][j] = inputData[i][j];
+        }
+    }
 }
 
 // Constructor to create a blank image of given width and height
-GrayscaleImage::GrayscaleImage(int w, int h) : width(w), height(h) {
+GrayscaleImage::GrayscaleImage(int w, int h) : width(w), height(h)
+{
     // TODO: Your code goes here.
     // Just dynamically allocate the memory for the new matrix.
+    data = new int *[height];
+    for (int i = 0; i < width; i++)
+    {
+        data[i] = new int[width];
+    }
 }
 
 // Copy constructor
-GrayscaleImage::GrayscaleImage(const GrayscaleImage& other) {
+GrayscaleImage::GrayscaleImage(const GrayscaleImage &other)
+{
     // TODO: Your code goes here.
-    // Copy constructor: dynamically allocate memory and 
+    // Copy constructor: dynamically allocate memory and
     // copy pixel values from another image.
+    data = new int *[height];
+    for (int i = 0; i < width; i++)
+    {
+        data[i] = new int[width];
+    }
+
+    for (int i = 0; i < height; i++)
+    {
+        for (int j = 0; j < width; j++)
+        {
+            data[i][j] = other.data[i][j];
+        }
+    }
 }
 
 // Destructor
-GrayscaleImage::~GrayscaleImage() {
+GrayscaleImage::~GrayscaleImage()
+{
     // TODO: Your code goes here.
     // Destructor: deallocate memory for the matrix.
+    delete[] data;
 }
 
 // Equality operator
-bool GrayscaleImage::operator==(const GrayscaleImage& other) const {
+bool GrayscaleImage::operator==(const GrayscaleImage &other) const
+{
     // TODO: Your code goes here.
     // Check if two images have the same dimensions and pixel values.
     // If they do, return true.
@@ -63,10 +117,11 @@ bool GrayscaleImage::operator==(const GrayscaleImage& other) const {
 }
 
 // Addition operator
-GrayscaleImage GrayscaleImage::operator+(const GrayscaleImage& other) const {
+GrayscaleImage GrayscaleImage::operator+(const GrayscaleImage &other) const
+{
     // Create a new image for the result
     GrayscaleImage result(width, height);
-    
+
     // TODO: Your code goes here.
     // Add two images' pixel values and return a new image, clamping the results.
 
@@ -74,10 +129,11 @@ GrayscaleImage GrayscaleImage::operator+(const GrayscaleImage& other) const {
 }
 
 // Subtraction operator
-GrayscaleImage GrayscaleImage::operator-(const GrayscaleImage& other) const {
+GrayscaleImage GrayscaleImage::operator-(const GrayscaleImage &other) const
+{
     // Create a new image for the result
     GrayscaleImage result(width, height);
-    
+
     // TODO: Your code goes here.
     // Subtract pixel values of two images and return a new image, clamping the results.
 
@@ -85,29 +141,35 @@ GrayscaleImage GrayscaleImage::operator-(const GrayscaleImage& other) const {
 }
 
 // Get a specific pixel value
-int GrayscaleImage::get_pixel(int row, int col) const {
+int GrayscaleImage::get_pixel(int row, int col) const
+{
     return data[row][col];
 }
 
 // Set a specific pixel value
-void GrayscaleImage::set_pixel(int row, int col, int value) {
+void GrayscaleImage::set_pixel(int row, int col, int value)
+{
     data[row][col] = value;
 }
 
 // Function to save the image to a PNG file
-void GrayscaleImage::save_to_file(const char* filename) const {
+void GrayscaleImage::save_to_file(const char *filename) const
+{
     // Create a buffer to hold the image data in the format stb_image_write expects
-    unsigned char* imageBuffer = new unsigned char[width * height];
+    unsigned char *imageBuffer = new unsigned char[width * height];
 
     // Fill the buffer with pixel data (convert int to unsigned char)
-    for (int i = 0; i < height; ++i) {
-        for (int j = 0; j < width; ++j) {
+    for (int i = 0; i < height; ++i)
+    {
+        for (int j = 0; j < width; ++j)
+        {
             imageBuffer[i * width + j] = static_cast<unsigned char>(data[i][j]);
         }
     }
 
     // Write the buffer to a PNG file
-    if (!stbi_write_png(filename, width, height, 1, imageBuffer, width)) {
+    if (!stbi_write_png(filename, width, height, 1, imageBuffer, width))
+    {
         std::cerr << "Error: Could not save image to file " << filename << std::endl;
     }
 
