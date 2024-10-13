@@ -30,7 +30,8 @@ void apply_gaussian_smoothing(const char *input_image, int kernel_size, double s
     GrayscaleImage img(input_image);
     Filter::apply_gaussian_smoothing(img, kernel_size, sigma);
     std::string output_filename = "gaussian_filtered_" + remove_extension(input_image) + "_" + std::to_string(kernel_size) + "_" + std::to_string(sigma) + ".png";
-    img.save_to_file(output_filename.c_str());
+    // img.save_to_file(output_filename.c_str());
+    img.save_to_file("./output.png");
 }
 
 // Applies an unsharp mask to the input image to enhance sharpness and saves the result
