@@ -20,7 +20,8 @@ void apply_mean_filter(const char *input_image, int kernel_size)
     GrayscaleImage img(input_image);
     Filter::apply_mean_filter(img, kernel_size);
     std::string output_filename = "mean_filtered_" + remove_extension(input_image) + "_" + std::to_string(kernel_size) + ".png";
-    img.save_to_file(output_filename.c_str());
+    // img.save_to_file(output_filename.c_str());
+    img.save_to_file("./output.png");
 }
 
 // Applies Gaussian smoothing to the input image and saves the result

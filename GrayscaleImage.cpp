@@ -126,7 +126,7 @@ bool GrayscaleImage::operator==(const GrayscaleImage &other) const
         {
             for (int j = 0; j < width; j++)
             {
-                if (this->data[i][j] != other.data[i][j])
+                if (this->data[i][j] != other.get_pixel(i, j))
                 {
                     return false;
                 }
@@ -149,12 +149,12 @@ GrayscaleImage GrayscaleImage::operator+(const GrayscaleImage &other) const
     {
         for (int j = 0; j < width; j++)
         {
-            int sum = this->data[i][j] + other.data[i][j];
+            int sum = this->data[i][j] + other.get_pixel(i, j);
             if (sum > 255)
             {
                 sum = 255;
             }
-            result.data[i][j] = sum;
+            result.set_pixel(i, j, sum);
         }
     }
 
@@ -173,12 +173,12 @@ GrayscaleImage GrayscaleImage::operator-(const GrayscaleImage &other) const
     {
         for (int j = 0; j < width; j++)
         {
-            int difference = this->data[i][j] - other.data[i][j];
+            int difference = this->data[i][j] - other.get_pixel(i, j);
             if (difference < 0)
             {
                 difference = 0;
             }
-            result.data[i][j] = difference;
+            result.set_pixel(i, j, difference);
         }
     }
 
