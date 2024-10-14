@@ -40,7 +40,8 @@ void apply_unsharp_mask(const char *input_image, int kernel_size, double amount)
     GrayscaleImage img(input_image);
     Filter::apply_unsharp_mask(img, kernel_size, amount);
     std::string output_filename = "unsharp_filtered_" + remove_extension(input_image) + "_" + std::to_string(kernel_size) + "_" + std::to_string(amount) + ".png";
-    img.save_to_file(output_filename.c_str());
+    // img.save_to_file(output_filename.c_str());
+    img.save_to_file("./output.png");
 }
 
 // Adds two images together and saves the resulting image

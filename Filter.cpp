@@ -95,4 +95,22 @@ void Filter::apply_unsharp_mask(GrayscaleImage &image, int kernelSize, double am
     // 1. Blur the image using Gaussian smoothing, use the default sigma given in the header.
     // 2. For each pixel, apply the unsharp mask formula: original + amount * (original - blurred).
     // 3. Clip values to ensure they are within a valid range [0-255].
+    GrayscaleImage original(image);
+    apply_gaussian_smoothing(image, kernelSize);
+    for (int i = 0; i < image.get_height(); i++)
+    {
+        for (int j = 0; j < image.get_width(); j++)
+        {
+            int result = original.get_pixel(i, j) + amount * (original.get_pixel(i, j) - image.get_pixel(i, j));
+            if (result > 255)
+            {
+                result = 255;
+            }
+            else if (result < 0)
+            {
+                result = 0;
+            }
+            image.set_pixel(i, j, result);
+        }
+    }
 }
