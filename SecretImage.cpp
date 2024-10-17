@@ -12,15 +12,15 @@ SecretImage::SecretImage(const GrayscaleImage &image)
     // 2. Fill both matrices with the pixels from the GrayscaleImage.
     width = image.get_width();
     height = image.get_height();
-    upper_triangular = new int[width * (width + 1) / 2];
-    lower_triangular = new int[width * (width - 1) / 2];
+    upper_triangular = new int[height * (height + 1) / 2];
+    lower_triangular = new int[height * (height - 1) / 2];
     int upper_index = 0;
     int lower_index = 0;
     for (int i = 0; i < height; i++)
     {
         for (int j = 0; j < width; j++)
         {
-            if (i >= j)
+            if (i <= j)
             {
                 upper_triangular[upper_index] = image.get_pixel(i, j);
                 upper_index++;
@@ -68,7 +68,7 @@ GrayscaleImage SecretImage::reconstruct() const
     {
         for (int j = 0; j < image.get_width(); j++)
         {
-            if (i >= j)
+            if (i <= j)
             {
                 image.set_pixel(i, j, upper_triangular[upper_index]);
                 upper_index++;
@@ -96,7 +96,7 @@ void SecretImage::save_back(const GrayscaleImage &image)
     {
         for (int j = 0; j < image.get_width(); j++)
         {
-            if (i >= j)
+            if (i <= j)
             {
                 upper_triangular[upper_index] = image.get_pixel(i, j);
                 upper_index++;
@@ -162,8 +162,8 @@ SecretImage SecretImage::load_from_file(const std::string &filename)
     input_file.open(filename);
     int width = 0, height = 0;
     input_file >> width >> height;
-    int upper_size = width * (width + 1) / 2;
-    int lower_size = width * (width - 1) / 2;
+    int upper_size = height * (height + 1) / 2;
+    int lower_size = height * (height - 1) / 2;
 
     int *upper_triangular = new int[upper_size];
     int *lower_triangular = new int[lower_size];
