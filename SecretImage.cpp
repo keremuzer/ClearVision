@@ -10,13 +10,15 @@ SecretImage::SecretImage(const GrayscaleImage &image)
     // TODO: Your code goes here.
     // 1. Dynamically allocate the memory for the upper and lower triangular matrices.
     // 2. Fill both matrices with the pixels from the GrayscaleImage.
-    upper_triangular = new int[image.get_width() * (image.get_width() + 1) / 2];
-    lower_triangular = new int[image.get_width() * (image.get_width() - 1) / 2];
+    width = image.get_width();
+    height = image.get_height();
+    upper_triangular = new int[width * (width + 1) / 2];
+    lower_triangular = new int[width * (width - 1) / 2];
     int upper_index = 0;
     int lower_index = 0;
-    for (int i = 0; i < image.get_height(); i++)
+    for (int i = 0; i < height; i++)
     {
-        for (int j = 0; j < image.get_width(); j++)
+        for (int j = 0; j < width; j++)
         {
             if (i >= j)
             {
@@ -121,7 +123,7 @@ void SecretImage::save_to_file(const std::string &filename)
     std::ofstream output_file;
     output_file.open(filename);
 
-    output_file << width + " " + height << std::endl;
+    output_file << width << " " << height << std::endl;
     for (int i = 0; i < width * (width + 1) / 2; i++)
     {
         output_file << upper_triangular[i];
@@ -131,6 +133,8 @@ void SecretImage::save_to_file(const std::string &filename)
         }
     }
 
+    output_file << std::endl;
+
     for (int i = 0; i < width * (width - 1) / 2; i++)
     {
         output_file << lower_triangular[i];
@@ -139,6 +143,7 @@ void SecretImage::save_to_file(const std::string &filename)
             output_file << " ";
         }
     }
+    output_file << std::endl;
     output_file.close();
 }
 

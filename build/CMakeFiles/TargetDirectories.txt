@@ -1,0 +1,3 @@
+/home/kerem/projects/ClearVision/build/CMakeFiles/clearvision.dir
+/home/kerem/projects/ClearVision/build/CMakeFiles/edit_cache.dir
+/home/kerem/projects/ClearVision/build/CMakeFiles/rebuild_cache.dir

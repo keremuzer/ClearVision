@@ -78,7 +78,8 @@ void disguise_image(const char *input_image)
     GrayscaleImage img(input_image);
     SecretImage secret_img(img);
     std::string output_filename = "secret_image_" + remove_extension(input_image) + ".dat";
-    secret_img.save_to_file(output_filename.c_str());
+    // secret_img.save_to_file(output_filename.c_str());
+    secret_img.save_to_file("./output.dat");
 }
 
 // Reconstructs a GrayscaleImage from a previously saved SecretImage file
@@ -87,7 +88,8 @@ void reveal_image(const char *input_file)
     SecretImage secret_img = SecretImage::load_from_file(input_file);
     GrayscaleImage reconstructed = secret_img.reconstruct();
     std::string output_filename = "reconstructed_" + remove_extension(input_file) + ".png";
-    reconstructed.save_to_file(output_filename.c_str());
+    // reconstructed.save_to_file(output_filename.c_str());
+    reconstructed.save_to_file("./output.png");
 }
 
 // Encrypts a message into the image using least significant bits (LSB) steganography

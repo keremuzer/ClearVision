@@ -1,0 +1,27 @@
+[
+{
+  "directory": "/home/kerem/projects/ClearVision/build",
+  "command": "/usr/bin/g++ -I/home/kerem/projects/ClearVision -g -std=gnu++11 -o CMakeFiles/clearvision.dir/main.cpp.o -c /home/kerem/projects/ClearVision/main.cpp",
+  "file": "/home/kerem/projects/ClearVision/main.cpp"
+},
+{
+  "directory": "/home/kerem/projects/ClearVision/build",
+  "command": "/usr/bin/g++ -I/home/kerem/projects/ClearVision -g -std=gnu++11 -o CMakeFiles/clearvision.dir/SecretImage.cpp.o -c /home/kerem/projects/ClearVision/SecretImage.cpp",
+  "file": "/home/kerem/projects/ClearVision/SecretImage.cpp"
+},
+{
+  "directory": "/home/kerem/projects/ClearVision/build",
+  "command": "/usr/bin/g++ -I/home/kerem/projects/ClearVision -g -std=gnu++11 -o CMakeFiles/clearvision.dir/GrayscaleImage.cpp.o -c /home/kerem/projects/ClearVision/GrayscaleImage.cpp",
+  "file": "/home/kerem/projects/ClearVision/GrayscaleImage.cpp"
+},
+{
+  "directory": "/home/kerem/projects/ClearVision/build",
+  "command": "/usr/bin/g++ -I/home/kerem/projects/ClearVision -g -std=gnu++11 -o CMakeFiles/clearvision.dir/Filter.cpp.o -c /home/kerem/projects/ClearVision/Filter.cpp",
+  "file": "/home/kerem/projects/ClearVision/Filter.cpp"
+},
+{
+  "directory": "/home/kerem/projects/ClearVision/build",
+  "command": "/usr/bin/g++ -I/home/kerem/projects/ClearVision -g -std=gnu++11 -o CMakeFiles/clearvision.dir/Crypto.cpp.o -c /home/kerem/projects/ClearVision/Crypto.cpp",
+  "file": "/home/kerem/projects/ClearVision/Crypto.cpp"
+}
+]
