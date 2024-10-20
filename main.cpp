@@ -99,7 +99,8 @@ void encrypt_image(const char *input_image, const char *message)
     SecretImage secret_img = Crypto::embed_LSBits(img, Crypto::encrypt_message(message));
     GrayscaleImage modified_img = secret_img.reconstruct();
     std::string output_filename = "modified_secret_image_" + remove_extension(input_image) + ".png";
-    modified_img.save_to_file(output_filename.c_str());
+    // modified_img.save_to_file(output_filename.c_str());
+    modified_img.save_to_file("output.png");
 }
 
 // Extracts an encrypted message from the image and decrypts it

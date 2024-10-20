@@ -6,7 +6,7 @@
     "type": "cppdbg",
     "request": "launch",
     "program": "${workspaceFolder}/clearvision",
-    "args": ["disguise", "./sample_io/disguise-reveal/flowers.png"],
+    "args": ["enc", "sample_io/secret-message-encrpytion/puppy.png", "hello"],
     "stopAtEntry": false,
     "cwd": "${workspaceFolder}",
     "environment": [],
